@@ -72,6 +72,8 @@ namespace IPA.Patcher
             foreach (var subType in type.NestedTypes)
             {
                 VirtualizeType(subType);
+                subType.IsNestedPrivate = false;
+                subType.IsNestedPublic = true;
             }
 
             foreach (var method in type.Methods)

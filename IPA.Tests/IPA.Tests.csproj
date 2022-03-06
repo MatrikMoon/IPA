@@ -68,9 +68,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IPA\IPA.csproj">
+    <ProjectReference Include="..\IPA\RoRIPA.csproj">
       <Project>{14092533-98bb-40a4-9afc-27bb75672a70}</Project>
-      <Name>IPA</Name>
+      <Name>RoRIPA</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

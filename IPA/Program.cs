@@ -108,8 +108,17 @@ namespace IPA
                     }
                 }
 
+                if (File.Exists(Path.Combine(context.ManagedPath, "RoR2.dll")))
+                {
+                    var virtualizedModule = VirtualizedModule.Load(Path.Combine(context.ManagedPath, "RoR2.dll"));
+                    Console.Write("Virtualizing RoR2.dll... ");
+                    backup.Add(Path.Combine(context.ManagedPath, "RoR2.dll"));
+                    virtualizedModule.Virtualize();
+                    Console.WriteLine("Done!");
+                }
+
                 // Creating shortcut
-                if(!File.Exists(context.ShortcutPath))
+                if (!File.Exists(context.ShortcutPath))
                 {
                     Console.Write("Creating shortcut to IPA ({0})... ",  context.IPA);
                     try
@@ -124,7 +133,7 @@ namespace IPA
                             iconPath: context.Executable
                         );
                         Console.WriteLine("Created");
-                    } catch (Exception e)
+                    } catch (Exception)
                     {
                         Console.Error.WriteLine("Failed to create shortcut, but game was patched!");
                     }
@@ -135,11 +144,9 @@ namespace IPA
                 Fail("Oops! This should not have happened.\n\n" + e);
             }
 
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Finished!");
             Console.ResetColor();
-
         }
 
         private static void Revert(PatchContext context)

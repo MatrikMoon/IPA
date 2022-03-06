@@ -73,8 +73,17 @@ namespace IllusionInjector
             try
             {
                 Assembly assembly = Assembly.LoadFrom(file);
+                List<Type> types = new List<Type>();
+                try
+                {
+                    types = assembly.GetTypes().ToList();
+                }
+                catch (ReflectionTypeLoadException e)
+                {
+                    types = e.Types.ToList().Where(x => x != null).ToList();
+                }
 
-                foreach (Type t in assembly.GetTypes())
+                foreach (Type t in types)
                 {
                     if (t.GetInterface("IPlugin") != null)
                     {
